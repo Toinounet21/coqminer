@@ -1,96 +1,102 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script defer src="/_vercel/insights/script.js"></script>
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/@exampledev/new.css@1.1.2/new.min.css"
-    />
-    <title>Vercel HTML Starter</title>
-    <meta
-      name="description"
-      content="High-performance HTML based website template."
-    />
-  </head>
-  <body>
-    <h1>Vercel HTML Starter</h1>
-    <p>
-      This template is a simple, but powerful single
-      <code>index.html</code> file deployed to
-      <a href="https://vercel.com">Vercel</a>. When your site is deployed, all
-      static assets (like HTML, JavaScript, CSS, images, and more) are deployed
-      globally to every
-      <a href="https://vercel.com/docs/concepts/edge-network/overview"
-        >Vercel Edge Network</a
-      >
-      region.
-    </p>
-    <h2>Simple, privacy-friendly analytics</h2>
-    <p>
-      Want to understand your visitor traffic? Vercel Analytics gives you
-      first-party, privacy-friendly traffic analytics for your HTML site. This
-      template is already configured using the following script:
-    </p>
-    <pre><code>&lt;script defer src="/_vercel/insights/script.js"&gt;&lt;/script&gt;</code></pre>
-    <p>
-      Learn more about
-      <a href="https://vercel.com/analytics">Vercel Analytics</a>.
-    </p>
-    <h2>Integrated with git</h2>
-    <p>
-      Deploying updates to your site is as simple as
-      <code>git push</code> thanks to Vercel's advanced
-      <a href="https://vercel.com/docs/concepts/git">Git Integration</a>.
-      Support for GitHub, GitLab, Bitbucket is zero-configuration, and with the
-      flexible Vercel CLI and API, you can integrate with any tool possible.
-    </p>
-    <p>
-      Learn more about
-      <a href="https://vercel.com/docs/concepts/git">Git Integration</a>.
-    </p>
-    <h2>Fast <code>gzip</code> compression</h2>
-    <p>
-      To help ensure the smallest possible file sizes for your static assets,
-      the Vercel Edge Network compresses files by default using
-      <code>gzip</code>. You can also optionally use
-      <code>brotli</code> compressesion if you prefer.
-    </p>
-    <p>
-      Learn more about
-      <a href="https://vercel.com/docs/concepts/edge-network/compression"
-        >compression</a
-      >.
-    </p>
-    <h2>Advanced routing configuration</h2>
-    <p>
-      Vercel gives you a variety of ways to configure the routing of your
-      website. For example, adding redirects, rewrites, or headers to your page.
-      While you can use <code>vercel.json</code> to define these through JSON,
-      you can also express your routing configuration as code using
-      <a href="https://vercel.com/docs/concepts/functions/edge-middleware"
-        >Vercel Edge Middleware</a
-      >.
-    </p>
-    <p>
-      Middleware runs before the
-      <a href="https://vercel.com/docs/concepts/edge-network/caching"
-        >Vercel Edge Network Cache</a
-      >, so you can configure routing exactly as your application needs. For
-      example, this template uses <code>middleware.js</code> defined in the root
-      of the repository to add additional security headers to the site:
-    </p>
-    <pre><code>referrer-policy: origin-when-cross-origin
-strict-transport-security: max-age=31536000; includeSubDomains; preload
-x-content-type-options: nosniff
-x-dns-prefetch-control: on
-x-frame-options: DENY</code></pre>
-    <p>
-      Learn more about
-      <a href="https://vercel.com/docs/concepts/functions/edge-middleware"
-        >Vercel Edge Middleware</a
-      >.
-    </p>
-  </body>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coq Miner</title>
+</head>
+<body>
+    <h1>Coq Miner</h1>
+    <button id="checkRewardsButton">Refresh</button>
+    <p id="lastHatch">Last Hatch : </p>
+    <p id="lastWithdraw">Last Withdraw : </p>
+    <p id="hatcheryMiners">Hatchery Miners : 0</p>
+    <p id="getEggsSinceLastHatch">Get Eggs Since Last Hatch : </p>
+    <button id="compounder">Compound</button>
+    <button id="withdrawer">Withdraw</button>
+	<script src="https://cdn.jsdelivr.net/npm/web3@1.5.2/dist/web3.min.js"></script>
+    <script>
+    	
+        if (window.ethereum) {
+            const web3 = new Web3(window.ethereum);
+
+            // Demande à l'utilisateur de se connecter avec MetaMask
+            window.ethereum.enable().then(function (accounts) {
+            	const userAddress = accounts[0];
+            	const coqminerAddr = "0x23c90BA7721824F7E0653Ff34C959D61aaCD2f3e"
+                const coqminerABI = [{"inputs":[{"internalType":"address","name":"_treasuryAddress","type":"address"},{"internalType":"bytes32","name":"_merkleRoot","type":"bytes32"}],"stateMutability":"nonpayable","type":"constructor"},{"inputs":[{"internalType":"address","name":"target","type":"address"}],"name":"AddressEmptyCode","type":"error"},{"inputs":[{"internalType":"address","name":"account","type":"address"}],"name":"AddressInsufficientBalance","type":"error"},{"inputs":[],"name":"FailedInnerCall","type":"error"},{"inputs":[{"internalType":"address","name":"token","type":"address"}],"name":"SafeERC20FailedOperation","type":"error"},{"inputs":[],"name":"COQ","outputs":[{"internalType":"contractIERC20","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"EGGS_TO_HATCH_1MINERS","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"ROUTER","outputs":[{"internalType":"contractIRouter","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"eth","type":"uint256"},{"internalType":"uint256","name":"contractBalance","type":"uint256"}],"name":"calculateEggBuy","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"eth","type":"uint256"}],"name":"calculateEggBuySimple","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"eggs","type":"uint256"}],"name":"calculateEggSell","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"rt","type":"uint256"},{"internalType":"uint256","name":"rs","type":"uint256"},{"internalType":"uint256","name":"bs","type":"uint256"}],"name":"calculateTrade","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"","type":"address"}],"name":"claimedEggs","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"ref","type":"address"}],"name":"compound","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"minAmount","type":"uint256"},{"internalType":"address","name":"ref","type":"address"}],"name":"depositAvax","outputs":[],"stateMutability":"payable","type":"function"},{"inputs":[{"internalType":"uint256","name":"amount","type":"uint256"},{"internalType":"address","name":"ref","type":"address"}],"name":"depositCoq","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"amount","type":"uint256"},{"internalType":"address","name":"ref","type":"address"},{"internalType":"bytes32[]","name":"proof","type":"bytes32[]"}],"name":"depositCoqWithProof","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"amount","type":"uint256"}],"name":"devFee","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"pure","type":"function"},{"inputs":[],"name":"getBalance","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"adr","type":"address"}],"name":"getEggsSinceLastHatch","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"getHalvingPercentage","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"getMyEggs","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"getMyMiners","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"","type":"address"}],"name":"hatcheryMiners","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"initialized","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"","type":"address"}],"name":"lastHatch","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"","type":"address"}],"name":"lastWithdraw","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"marketCoq","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"merkleRoot","outputs":[{"internalType":"bytes32","name":"","type":"bytes32"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"owner","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"","type":"address"}],"name":"referrals","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"seedMarket","outputs":[],"stateMutability":"payable","type":"function"},{"inputs":[],"name":"treasuryAddress","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"withdraw","outputs":[],"stateMutability":"nonpayable","type":"function"}]
+                
+                const ERC20ABI = [
+                    // Inclus l'ABI de getPendingRewardsForUsers ici
+                    {
+                        "constant": true,
+                        "inputs": [{"name": "_user", "type": "address"}],
+                        "name": "balanceOf",
+                        "outputs": [{"name": "", "type": "uint256"}],
+                        "payable": false,
+                        "stateMutability": "view",
+                        "type": "function"
+                    }
+                ];
+                const coqminer = new web3.eth.Contract(coqminerABI, coqminerAddr);
+				//const based = new web3.eth.Contract(ERC20ABI, basedAddress);
+				//const pepe = new web3.eth.Contract(ERC20ABI, pepeAddress);
+				//const farming = new web3.eth.Contract(farmingABI, farmingAddress);
+				
+                async function checkRewards() {
+                    
+                    try {
+                        const lastHatchVar = await coqminer.methods.lastHatch(userAddress).call();
+                        console.log(lastHatchVar)
+                        var date = new Date(lastHatchVar*1000);
+						var isoStringHatch = date.toISOString();
+                        const lastWithdrawVar = await coqminer.methods.lastWithdraw(userAddress).call();
+                        console.log(lastWithdrawVar)
+                        var dateb = new Date(lastWithdrawVar*1000);
+						var isoStringWithdraw = dateb.toISOString();
+                        const hatcheryMinersVar = await coqminer.methods.hatcheryMiners(userAddress).call();
+                        console.log(hatcheryMinersVar)
+                        
+                        const getEggsSinceLastHatchVar = await coqminer.methods.getEggsSinceLastHatch(userAddress).call();
+                        console.log(getEggsSinceLastHatchVar)
+                        
+                        document.getElementById('lastHatch').innerText = 'Last Hatch : ' + isoStringHatch;
+                        document.getElementById('lastWithdraw').innerText = 'Last Withdraw : ' + isoStringWithdraw;
+                        document.getElementById('hatcheryMiners').innerText = 'Hatchery Miners : ' + hatcheryMinersVar;
+                        document.getElementById('getEggsSinceLastHatch').innerText = 'Get Eggs Since Last Hatch : ' + getEggsSinceLastHatchVar;
+                    } catch (error) {
+                        alert("Erreur lors de la récupération des récompenses : " + error.message);
+                    }
+                }
+                
+                async function compound() {
+                    
+                    try {
+                        const result = await coqminer.methods.compound("0x9DEC4b2816eAa9A3793a634f0ad046bAE8a4c12d").send({ from: userAddress });
+						//const result = await contract.methods.withdrawToken("0x912ce59144191c1204e64559fe8253a0e49e6548").send({ from: userAddress });
+                        alert("Transaction réussie : " + result.transactionHash);
+                    } catch (error) {
+                        alert("Erreur lors de l'envoi de la transaction : " + error.message);
+                    }
+                }
+                async function withdraw() {
+                    
+                    try {
+                        const result = await coqminer.methods.withdraw().send({ from: userAddress });
+						//const result = await contract.methods.withdrawToken("0x912ce59144191c1204e64559fe8253a0e49e6548").send({ from: userAddress });
+                        alert("Transaction réussie : " + result.transactionHash);
+                    } catch (error) {
+                        alert("Erreur lors de l'envoi de la transaction : " + error.message);
+                    }
+                }
+
+                document.getElementById("compounder").addEventListener("click", compound);
+                document.getElementById("withdrawer").addEventListener("click", withdraw);
+                document.getElementById("checkRewardsButton").addEventListener("click", checkRewards);
+            });
+        } else {
+            alert("Veuillez installer MetaMask pour utiliser cette interface.");
+        }
+    </script>
+</body>
 </html>
